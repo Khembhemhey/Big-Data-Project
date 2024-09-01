@@ -1,0 +1,87 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Game Sales Analytics Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Video Game Analytics Dashboard</h1>
+    </header>
+
+    <section class="section">
+        <h2 class="section-header">Import CSV</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="csv_file">
+            <button type="submit">Import CSV</button>
+        </form>
+    </section>
+    
+
+    <div class="container">
+        <section class="section">
+            <h2 class="section-header">Game Performance Overview</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Platform</th>
+                        <th>Year of Release</th>
+                        <th>Genre</th>
+                        <th>Publisher</th>
+                        <th>North America Sales</th>
+                        <th>European Union Sales</th>
+                        <th>Japan Sales</th>
+                        <th>Other Sales</th>
+                        <th>Global Sales</th>
+                        <th>Critic Score</th>
+                        <th>Critic Count</th>
+                        <th>User Score</th>
+                        <th>User Count</th>
+                        <th>Developer</th>
+                        <th>Rating</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if game_data %}
+                        {% for game in game_data %}
+                            <tr>
+                                <td>{{ game.Name }}</td>
+                                <td>{{ game.Platform }}</td>
+                                <td>{{ game.Year_of_Release }}</td>
+                                <td>{{ game.Genre }}</td>
+                                <td>{{ game.Publisher }}</td>
+                                <td>{{ game.NA_Sales }}</td>
+                                <td>{{ game.EU_Sales }}</td>
+                                <td>{{ game.JP_Sales }}</td>
+                                <td>{{ game.Other_Sales }}</td>
+                                <td>{{ game.Global_Sales }}</td>
+                                <td>{{ game.Critic_Score }}</td>
+                                <td>{{ game.Critic_Count }}</td>
+                                <td>{{ game.User_Score }}</td>
+                                <td>{{ game.User_Count }}</td>
+                                <td>{{ game.Developer }}</td>
+                                <td>{{ game.Rating }}</td>
+                            </tr>
+                        {% endfor %}
+                    {% endif %}
+                </tbody>                 
+            </table>
+        </section>
+    
+        <!-- Add more sections for different analytics if needed -->
+    
+    </div>
+    
+
+    <!-- <footer>
+        <p>&copy; 2024 Your Company Name. All rights reserved.</p>
+    </footer> -->
+</body>
+
+
+</html>
